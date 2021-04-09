@@ -38,4 +38,4 @@ class Widget:
                 self.onClick()
 
     def model(self) -> Model:
-        return Model(self.position, self.size, self.background, self.texture, self.text)
+        return Model(self.position, self.size, self.background, self.texture, self.text, 0)

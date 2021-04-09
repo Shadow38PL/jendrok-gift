@@ -28,10 +28,7 @@ class Renderer:
 
         if model.texture is not None:
             texture = pygame.transform.scale(model.texture.value, (model.size.x, model.size.y))
-            self.display.blit(texture, (model.position.x, model.position.y))
-
-        if model.texture is not None:
-            texture = pygame.transform.scale(model.texture.value, (model.size.x, model.size.y))
+            texture = pygame.transform.rotate(texture, model.rotation)
             self.display.blit(texture, (model.position.x, model.position.y))
 
         if model.text is not None:

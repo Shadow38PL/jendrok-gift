@@ -1,5 +1,6 @@
 import pygame
 import sys
+import random
 
 from pygame import Color
 
@@ -7,9 +8,18 @@ from renderer import Renderer
 from texture import Texture
 from vector2 import Vector2Float
 from widget import Widget
+from widget_jendrok import WidgetJendrok
 
 HEIGHT = 320
 WIDTH = 480
+
+quotes = [
+    "dron.on... dron OFF hyhyHY",
+    "Bartek NIE DZIAŁAAAAAAAAAAA",
+    "lol",
+    "kek",
+    "xd"
+]
 
 
 def main():
@@ -24,17 +34,27 @@ def main():
         pygame.quit()
         sys.exit(0)
 
-    pacman = Widget(Vector2Float(20, 20), Vector2Float(32, 32), None, Texture.PACMAN_0, None, close)
-    text = Widget(Vector2Float(20, 70), Vector2Float(320, 32), None, None, "Ale kupa", None)
+    title1 = Widget(Vector2Float(190, 40), Vector2Float(260, 32), None, None, "Jendrok MOOD", None)
+    title2 = Widget(Vector2Float(190, 70), Vector2Float(260, 32), None, None, "Simulator", None)
+    jendrok = WidgetJendrok(Vector2Float(20, 20), Vector2Float(100, 148), None, Texture.JENDROK, None, None)
+    text = Widget(Vector2Float(20, 220), Vector2Float(440, 32), None, None, quotes[random.randint(0, quotes.__len__() - 1)], None)
+    decor = Widget(Vector2Float(0, 280), Vector2Float(480, 40), Color(143, 2, 44), None, None, None)
+    exit = Widget(Vector2Float(440, 0), Vector2Float(40, 40), None, Texture.JENDROK, None, close)
 
     def onclick():
-        text.text = "lol xd haha"
+        newText = quotes[random.randint(0, quotes.__len__() - 1)]
+        while text.text == newText:
+            newText = quotes[random.randint(0, quotes.__len__() - 1)]
+        text.text = newText
+        jendrok.spin()
 
     root = Widget(Vector2Float(0, 0), Vector2Float(WIDTH, HEIGHT), Color(255, 255, 255), None, None, onclick)
-
-
-    root.children.append(pacman)
+    root.children.append(title1)
+    root.children.append(title2)
+    root.children.append(jendrok)
     root.children.append(text)
+    root.children.append(decor)
+    root.children.append(exit)
 
     while True:
         clickPosition: Vector2Float = None
