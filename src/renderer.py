@@ -4,7 +4,7 @@ from pygame.font import Font
 
 from widget import Widget
 
-BACKGROUND = (0, 0, 0)
+BACKGROUND = (255, 0, 0)
 
 
 class Renderer:

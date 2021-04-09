@@ -8,8 +8,8 @@ from texture import Texture
 from vector2 import Vector2Float
 from widget import Widget
 
-HEIGHT = 480
-WIDTH = 640
+HEIGHT = 320
+WIDTH = 480
 
 
 def main():
