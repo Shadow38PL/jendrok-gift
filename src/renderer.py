@@ -19,13 +19,14 @@ class Renderer:
     def renderWidget(self, widget: Widget):
         model = widget.model()
 
-        if model.updated or (model.background is not None and model.background == BACKGROUND):
-            self.display.fill(BACKGROUND, Rect(
-                model.position.x,
-                model.position.y,
-                model.size.x,
-                model.size.y
-            ))
+        if model.updated or model.background == BACKGROUND:
+            if model.clear:
+                self.display.fill(BACKGROUND, Rect(
+                    model.position.x,
+                    model.position.y,
+                    model.size.x,
+                    model.size.y
+                ))
 
             if model.background is not None and model.background != BACKGROUND:
                 self.display.fill(model.background, Rect(

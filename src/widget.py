@@ -45,4 +45,4 @@ class Widget:
     def model(self) -> Model:
         updated = self.updated
         self.updated = False
-        return Model(self.position, self.size, self.background, self.texture, self.text, 0, updated)
+        return Model(self.position, self.size, self.background, self.texture, self.text, 0, updated, True)

@@ -12,8 +12,9 @@ class Model:
     rotation: float
     text: str
     updated: bool
+    clear: bool
 
-    def __init__(self, position: Vector2Float, size: Vector2Float, background: Color, texture: Texture, text: str, rotation: float, updated: bool):
+    def __init__(self, position: Vector2Float, size: Vector2Float, background: Color, texture: Texture, text: str, rotation: float, updated: bool, clear: bool):
         self.position = position
         self.size = size
         self.background = background
@@ -21,3 +22,4 @@ class Model:
         self.text = text
         self.rotation = rotation
         self.updated = updated
+        self.clear = clear

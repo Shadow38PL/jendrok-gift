@@ -31,4 +31,4 @@ class WidgetJendrok(Widget):
         self.spinning = True
 
     def model(self) -> Model:
-        return Model(self.position, self.size, self.background, self.texture, self.text, self.rotation, True)
+        return Model(self.position, self.size, self.background, self.texture, self.text, self.rotation, True, False)
