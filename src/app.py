@@ -50,7 +50,7 @@ quotes = [
 def main():
     pygame.init()
     pygame.display.set_caption("Jendrok")
-    display = pygame.display.set_mode((WIDTH, HEIGHT))
+    display = pygame.display.set_mode((WIDTH, HEIGHT), pygame.FULLSCREEN)
     clock = pygame.time.Clock()
 
     renderer = Renderer(display)
