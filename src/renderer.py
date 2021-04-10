@@ -11,7 +11,7 @@ BACKGROUND = (255, 255, 255)
 class Renderer:
     display: pygame.display
     font: Font
-    experimental = False
+    experimental = True
 
     def __init__(self, display: pygame.display):
         self.display = display
