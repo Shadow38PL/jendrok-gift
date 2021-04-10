@@ -13,7 +13,7 @@ class Renderer:
 
     def __init__(self, display: pygame.display):
         self.display = display
-        self.font = pygame.font.Font(pygame.font.get_default_font(), 24)
+        self.font = pygame.font.Font('./fonts/Montserrat-SemiBold.ttf', 24)
 
     def renderWidget(self, widget: Widget):
         model = widget.model()
@@ -32,7 +32,7 @@ class Renderer:
             self.display.blit(texture, (model.position.x, model.position.y))
 
         if model.text is not None:
-            text = self.font.render(model.text, True, (0, 0, 0))
+            text = self.font.render(model.text, True, (51, 51, 51))
             self.display.blit(text, (model.position.x, model.position.y), Rect(
                 0,
                 0,
