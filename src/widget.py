@@ -13,6 +13,7 @@ class Widget:
     text: str
     children = None
     onClick = None
+    updated = True
 
     def __init__(self, position: Vector2Float, size: Vector2Float, background: Color, texture: Texture, text: str, onclick):
         self.position = position
@@ -27,6 +28,10 @@ class Widget:
         for child in self.children:
             child.animate(deltaTime)
 
+    def setText(self, text: str):
+        self.text = text
+        self.updated = True
+
     def click(self, clickPosition: Vector2Float) -> bool:
         if clickPosition is not None:
             for child in self.children:
@@ -38,4 +43,6 @@ class Widget:
                 self.onClick()
 
     def model(self) -> Model:
-        return Model(self.position, self.size, self.background, self.texture, self.text, 0)
+        updated = self.updated
+        self.updated = False
+        return Model(self.position, self.size, self.background, self.texture, self.text, 0, updated)

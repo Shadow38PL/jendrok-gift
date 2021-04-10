@@ -74,15 +74,15 @@ def main():
     def showQuote():
         currentText[0] = generateQuote()
         splittedText = currentText[0].split("\n")
-        text.text = splittedText[0]
-        text2.text = splittedText[1] if len(splittedText) > 1 else ""
-
+        text.setText(splittedText[0])
+        text2.setText(splittedText[1] if len(splittedText) > 1 else "")
 
     title1 = Widget(Vector2Float(220, 40), Vector2Float(320, 32), None, None, "Jendrok MOOD", None)
     title2 = Widget(Vector2Float(220, 70), Vector2Float(320, 32), None, None, "Generator", None)
+    jendrokB = Widget(Vector2Float(0, 0), Vector2Float(220, 215), Color(255, 255, 255), None, None, None)
     jendrok = WidgetJendrok(Vector2Float(20, 20), Vector2Float(120, 168), None, Texture.JENDROK, None, None)
-    text = Widget(Vector2Float(14, 210), Vector2Float(450, 32), None, None, "", None)
-    text2 = Widget(Vector2Float(24, 235), Vector2Float(450, 32), None, None, "", None)
+    text = Widget(Vector2Float(14, 215), Vector2Float(450, 32), None, None, "", None)
+    text2 = Widget(Vector2Float(24, 240), Vector2Float(450, 32), None, None, "", None)
     decor = Widget(Vector2Float(0, 280), Vector2Float(480, 40), Color(143, 2, 44), None, None, None)
     exit = Widget(Vector2Float(444, 4), Vector2Float(32, 32), None, Texture.EXIT, None, close)
 
@@ -92,12 +92,13 @@ def main():
         showQuote()
         jendrok.spin()
 
-    root = Widget(Vector2Float(0, 0), Vector2Float(WIDTH, HEIGHT), Color(255, 255, 255), None, None, onclick)
+    root = Widget(Vector2Float(0, 0), Vector2Float(WIDTH, HEIGHT), None, None, None, onclick)
     root.children.append(title1)
     root.children.append(title2)
+    root.children.append(jendrokB)
     root.children.append(jendrok)
-    root.children.append(text)
     root.children.append(text2)
+    root.children.append(text)
     root.children.append(decor)
     root.children.append(exit)
 

@@ -4,7 +4,7 @@ from pygame.font import Font
 
 from widget import Widget
 
-BACKGROUND = (255, 0, 0)
+BACKGROUND = (255, 255, 255)
 
 
 class Renderer:
@@ -14,36 +14,44 @@ class Renderer:
     def __init__(self, display: pygame.display):
         self.display = display
         self.font = pygame.font.Font('./fonts/Montserrat-SemiBold.ttf', 24)
+        self.display.fill(BACKGROUND)
 
     def renderWidget(self, widget: Widget):
         model = widget.model()
 
-        if model.background is not None:
-            self.display.fill(model.background, Rect(
+        if model.updated or (model.background is not None and model.background == BACKGROUND):
+            self.display.fill(BACKGROUND, Rect(
                 model.position.x,
                 model.position.y,
                 model.size.x,
                 model.size.y
             ))
 
-        if model.texture is not None:
-            texture = pygame.transform.scale(model.texture.value, (model.size.x, model.size.y))
-            texture = pygame.transform.rotate(texture, model.rotation)
-            self.display.blit(texture, (model.position.x, model.position.y))
+            if model.background is not None and model.background != BACKGROUND:
+                self.display.fill(model.background, Rect(
+                    model.position.x,
+                    model.position.y,
+                    model.size.x,
+                    model.size.y
+                ))
 
-        if model.text is not None:
-            text = self.font.render(model.text, True, (51, 51, 51))
-            self.display.blit(text, (model.position.x, model.position.y), Rect(
-                0,
-                0,
-                model.size.x,
-                model.size.y
-            ))
+            if model.texture is not None:
+                texture = pygame.transform.scale(model.texture.value, (model.size.x, model.size.y))
+                texture = pygame.transform.rotate(texture, model.rotation)
+                self.display.blit(texture, (model.position.x, model.position.y))
+
+            if model.text is not None:
+                text = self.font.render(model.text, True, (51, 51, 51))
+                self.display.blit(text, (model.position.x, model.position.y), Rect(
+                    0,
+                    0,
+                    model.size.x,
+                    model.size.y
+                ))
 
         for child in widget.children:
             self.renderWidget(child)
 
     def render(self, widget: Widget):
-        self.display.fill(BACKGROUND)
         self.renderWidget(widget)
         pygame.display.update()
