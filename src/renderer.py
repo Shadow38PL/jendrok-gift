@@ -2,6 +2,7 @@ import pygame
 from pygame import Rect
 from pygame.font import Font
 
+from texture import Texture
 from widget import Widget
 
 BACKGROUND = (255, 255, 255)
@@ -10,6 +11,7 @@ BACKGROUND = (255, 255, 255)
 class Renderer:
     display: pygame.display
     font: Font
+    experimental = False
 
     def __init__(self, display: pygame.display):
         self.display = display
@@ -20,7 +22,14 @@ class Renderer:
         model = widget.model()
 
         if model.updated or model.background == BACKGROUND:
-            if model.clear:
+            if model.texture is Texture.JENDROK:
+                self.display.fill(BACKGROUND, Rect(
+                    0,
+                    0,
+                    220,
+                    215
+                ))
+            else:
                 self.display.fill(BACKGROUND, Rect(
                     model.position.x,
                     model.position.y,
@@ -28,7 +37,7 @@ class Renderer:
                     model.size.y
                 ))
 
-            if model.background is not None and model.background != BACKGROUND:
+            if model.background is not None:
                 self.display.fill(model.background, Rect(
                     model.position.x,
                     model.position.y,
@@ -50,9 +59,26 @@ class Renderer:
                     model.size.y
                 ))
 
+            if self.experimental:
+                if model.texture is Texture.JENDROK:
+                    pygame.display.update(Rect(
+                        0,
+                        0,
+                        220,
+                        215
+                    ))
+                else:
+                    pygame.display.update(Rect(
+                        model.position.x,
+                        model.position.y,
+                        model.size.x,
+                        model.size.y
+                    ))
+
         for child in widget.children:
             self.renderWidget(child)
 
     def render(self, widget: Widget):
         self.renderWidget(widget)
-        pygame.display.update()
+        if not self.experimental:
+            pygame.display.update()
