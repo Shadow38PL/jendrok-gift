@@ -49,6 +49,7 @@ quotes = [
 
 def main():
     pygame.init()
+    pygame.mouse.set_cursor((8,8),(0,0),(0,0,0,0,0,0,0,0),(0,0,0,0,0,0,0,0))
     pygame.display.set_caption("Jendrok")
     display = pygame.display.set_mode((WIDTH, HEIGHT), pygame.FULLSCREEN)
     clock = pygame.time.Clock()
