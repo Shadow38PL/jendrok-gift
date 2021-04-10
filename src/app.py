@@ -118,7 +118,7 @@ def main():
                 pos = pygame.mouse.get_pos()
                 clickPosition = Vector2Float(pos[0], pos[1])
 
-        deltaTime = clock.tick(16) / 1000.0
+        deltaTime = clock.tick(30) / 1000.0
         root.animate(deltaTime)
         root.click(clickPosition)
 
